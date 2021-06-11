@@ -1,0 +1,89 @@
+<header id="header" class="fixed-top">
+  <div class="container d-flex align-items-center">
+    <h1 class="logo me-auto">
+      <a href="index.html"><span>Portal</span>Vegan</a>
+    </h1>
+    <!-- Uncomment below if you prefer to use an image logo -->
+    <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+    <nav id="navbar" class="navbar order-last order-lg-0">
+      <ul>
+        <li>
+          <a [routerLink]="['noticias-recentes']">Noticias Recentes</a>
+        </li>
+        <li><a [routerLink]="['receitas-recentes']">Receitas</a></li>
+        <li><a [routerLink]="['restaurantes-recentes']">Restaurantes</a></li>
+        <!-- <li><a href="services.html">Services</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="blog.html" class="active">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li> -->
+        <li class="dropdown">
+          <a type="button"
+            ><span>Minha Conta</span> <i class="bi bi-chevron-right"></i
+          ></a>
+          <ul>
+            <li class="dropdown">
+              <a type="button"
+                ><span>Noticias</span> <i class="bi bi-chevron-right"></i
+              ></a>
+              <ul>
+                <li>
+                  <a [routerLink]="['minhas-noticias']">Minhas Publicações</a>
+                </li>
+                <li>
+                  <a [routerLink]="['cadastro-noticias']"
+                    >Cadastrar Publicações</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a type="button"
+                ><span>Receitas</span> <i class="bi bi-chevron-right"></i
+              ></a>
+              <ul>
+                <li>
+                  <a [routerLink]="['minhas-receitas']">Minhas Receitas</a>
+                </li>
+                <li>
+                  <a [routerLink]="['cadastro-receitas']">Cadastrar Receitas</a>
+                </li>
+                <!-- <li>
+                  <a [routerLink]="['cadastro-noticias']"
+                    >Cadastrar Publicações</a
+                  >
+                </li> -->
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a type="button"
+                ><span>Restaurantes</span> <i class="bi bi-chevron-right"></i
+              ></a>
+              <ul>
+                <li>
+                  <a [routerLink]="['meus-restaurantes']">Meus Restaurantes</a>
+                </li>
+                <li>
+                  <a [routerLink]="['cadastro-restaurantes']">Cadastrar Restaurante</a>
+                </li>
+                <!-- <li>
+                  <a [routerLink]="['cadastro-noticias']"
+                    >Cadastrar Publicações</a
+                  >
+                </li> -->
+              </ul>
+            </li>
+            <!-- <li><a href="#">Deep Drop Down 2</a></li>
+            <li><a href="#">Deep Drop Down 3</a></li>
+            <li><a href="#">Deep Drop Down 4</a></li>
+            <li><a href="#">Deep Drop Down 5</a></li> -->
+          </ul>
+        </li>
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav>
+
+  </div>
+</header>
+<!-- End Header -->

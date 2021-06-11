@@ -1,0 +1,84 @@
+<div class="row">
+  <div class="col-md-12">
+    <h2>Já possui conta? Faça o Login.</h2>
+    <div class="row">
+      <div class="col-md-12">
+        <form [formGroup]="login" (submit)="onSubmit()">
+          <div class="mb-3">
+            <div class="input-group">
+              <div class="input-group-text">@</div>
+              <input
+                type="text"
+                class="form-control {{
+                  this.login.controls['login'].touched &&
+                  this.login.controls['login'].value == null
+                    ? 'is-invalid'
+                    : ''
+                }}"
+                placeholder="Apelido"
+                formControlName="login"
+              />
+              <br />
+            </div>
+            <span
+              class="text-danger"
+              *ngIf="
+                this.login.controls['login'].touched &&
+                this.login.controls['login'].value == null
+              "
+            >
+              É necessário preencher o Apelido</span
+            >
+            <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Senha</label>
+            <input
+              type="password"
+              class="form-control {{
+                this.login.controls['senha'].touched &&
+                this.login.controls['senha'].value == null
+                  ? 'is-invalid'
+                  : ''
+              }}"
+              id="exampleInputPassword1"
+              formControlName="senha"
+            />
+            <span
+              class="text-danger"
+              *ngIf="
+                this.login.controls['senha'].touched &&
+                this.login.controls['senha'].value == null
+              "
+            >
+              É necessário preencher a senha</span
+            >
+          </div>
+          <div class="alert alert-danger" role="alert" *ngIf="this.error != null">
+            Ocorreu um erro ao obter contato com o servidor, por favor tente novamente.
+          </div>
+          <button
+            type="submit"
+            class="btn btn-success"
+            [disabled]="!this.login.valid"
+            *ngIf="!loading"
+          >
+            Entrar
+          </button>
+          <button
+            class="btn btn-success"
+            *ngIf="loading"
+            type="button"
+            disabled
+          >
+            <span
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

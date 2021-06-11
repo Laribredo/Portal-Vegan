@@ -1,0 +1,86 @@
+<section id="breadcrumbs" class="breadcrumbs">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center">
+      <h2>Cadastro de Publicações</h2>
+    </div>
+  </div>
+</section>
+<!-- End Breadcrumbs -->
+<!-- ======= Blog Section ======= -->
+<section id="blog" class="blog">
+  <div class="container" data-aos="fade-up">
+    <div class="row">
+      <div class="col-lg-8 entries" style="padding: 30px">
+        <h2>Cadastrar uma nova Publicação.</h2>
+        <form [formGroup]="cadastro" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="formGroupExampleInput">Titulo da Publicação</label>
+            <input
+              type="text"
+              class="form-control {{
+                this.cadastro.controls['titulo'].touched &&
+                this.cadastro.controls['titulo'].value == null
+                  ? 'is-invalid'
+                  : ''
+              }}"
+              formControlName="titulo"
+              placeholder="Titulo"
+            />
+            <div
+              *ngIf="
+                this.cadastro.controls['titulo'].touched &&
+                this.cadastro.controls['titulo'].value == null
+              "
+            >
+              <span class="text-danger">
+                É necessário preencher o titulo. <br
+              /></span>
+            </div>
+            <label for="formGroupExampleInput">Imagem da Publicação</label>
+            <input
+              type="file"
+              class="form-control"
+              id="formGroupExampleInput"
+              (change)="onFileChange($event)"
+            />
+          </div>
+          <label for="formGroupExampleInput">Conteudo</label>
+          <angular-editor
+            formControlName="conteudo"
+            [config]="editorConfig"
+          ></angular-editor>
+          <div
+          *ngIf="
+            this.cadastro.controls['conteudo'].touched &&
+            this.cadastro.controls['conteudo'].value == null
+          "
+        >
+          <span class="text-danger">
+            É necessário preencher o conteudo. <br
+          /></span>
+        </div>
+        <div
+        *ngIf="
+         erros.length > 0
+        "
+      >
+        <li>
+          <ul class="text-danger" *ngFor="let erro of erros">{{erro}}</ul>
+        </li>
+      </div>
+          <button class="btn btn-success espacamento" type="submit" [disabled]="!this.cadastro.valid">
+            Salvar
+          </button>
+          <button class="btn btn-secondary espacamento" (click)="limpar()">Limpar</button>
+        </form>
+      </div>
+      <!-- End blog entries list -->
+      <div class="col-lg-4">
+        <app-recentes [atualiza]="atualiza"></app-recentes>
+        <!-- End sidebar -->
+      </div>
+      <!-- End blog sidebar -->
+    </div>
+  </div>
+</section>
+<!-- End Blog Section -->

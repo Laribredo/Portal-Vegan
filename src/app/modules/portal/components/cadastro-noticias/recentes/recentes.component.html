@@ -1,0 +1,22 @@
+<div class="sidebar">
+  <h3 class="sidebar-title"> Minhas Ultimas Publicações </h3>
+  <div class="sidebar-item recent-posts">
+    <div class="post-item clearfix" *ngFor="let item of recentes">
+      <img src="http://localhost/Imagens/{{item.imagem}}" alt="" />
+      <h4>
+        <a href="blog-single.html"
+          >{{item.titulo}}</a
+        >
+      </h4>
+      <time datetime="{{item.dtCadastro}}">{{item.dtCadastro}}</time>
+    </div>
+  </div>
+  <div class="post-item clearfix">
+    <h6>
+      <a [routerLink]="['./minhas-noticias']" routerLinkActive="router-link-active"  style="color: black;"
+        >Ver todas as Minhas Publicações</a
+      >
+    </h6>
+  </div>
+  <!-- End sidebar recent posts-->
+</div>

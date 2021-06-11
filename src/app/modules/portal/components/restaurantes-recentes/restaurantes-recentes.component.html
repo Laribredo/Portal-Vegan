@@ -1,0 +1,214 @@
+<section id="breadcrumbs" class="breadcrumbs">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center">
+      <h2>Restaurantes da sua Cidade.</h2>
+      <!-- <ol>
+        <li><a href="index.html">Home</a></li>
+        <li>Blog</li>
+      </ol> -->
+    </div>
+    <p style="color: white">Localização próxima obtida: {{ ruaAtual }}</p>
+  </div>
+</section>
+<!-- ======= Blog Section ======= -->
+<section id="blog" class="blog">
+  <div class="container" data-aos="fade-up">
+    <div class="row">
+      <div class="col-lg-8 entries">
+        <article class="entry" *ngIf="restaurantes.length == 0">
+          <div *ngIf="!error">
+            <h4>Não há cadastrados na sua cidade</h4>
+          </div>
+          <div *ngIf="error">
+            <h4>
+              Libere sua localização para a busca de restaurantes de sua cidade,
+              ou escolha uma cidade abaixo:
+            </h4>
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="inputState">Estado</label>
+                  <select id="inputState" class="form-control" (change)="getCidades($event.target.value)">
+                    <option selected>Selecione</option>
+                    <option *ngFor="let estado of estados" value="{{ estado }}">
+                      {{ estado }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="inputState">Cidade</label>
+                  <select id="inputState" class="form-control"  (change)="selecionaCidade($event.target.value)">
+                    <option selected>Selecione</option>
+                    <option *ngFor="let cidade of cidades" value="{{cidade}}">
+                      {{ cidade }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="inputState">Digite um bairro:</label>
+                  <input type="text" class="form-control" (change)="selecionaBairro($event.target.value)">
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="entry" *ngFor="let res of restaurantes; let i = index">
+          <div class="entry-img">
+            <img
+              src="{{ repositorio + res.imagem }}"
+              alt=""
+              class="img-fluid"
+            />
+          </div>
+          <h2 class="entry-title">
+            <a>{{ res.nomeRestaurante }}</a>
+          </h2>
+          <div class="entry-meta">
+            <ul>
+              <li class="d-flex align-items-center">
+                <i class="bi bi-person"></i> <a>@{{ res.apelido }}</a>
+              </li>
+              <li class="d-flex align-items-center">
+                <i class="bi bi-clock"></i>
+                <a
+                  ><time datetime="2020-01-01"></time
+                  >{{ res.dtCadastro | date: "dd MMM, yyyy" }}</a
+                >
+              </li>
+              <li class="d-flex align-items-center">
+                <i class="bi bi-map"></i> {{ restaurante_show[i] }} Distancia
+              </li>
+              <li class="d-flex align-items-center">
+                <i class="bi bi-star"></i> {{ res.media }}
+              </li>
+            </ul>
+          </div>
+          <div class="entry-content">
+            <h6>
+              {{
+                res.endereco +
+                  ", " +
+                  res.numero +
+                  ", " +
+                  res.municipio +
+                  "-" +
+                  res.uf
+              }}
+            </h6>
+            <ul
+              class="list-group list-group-horizontal"
+              style="list-style-type: none; cursor: pointer"
+            >
+              <li style="padding-top: 7px">
+                <a
+                  type="button"
+                  (click)="votar(1, i)"
+                  [disabled]="res.voto == null"
+                  ><i
+                    class="{{
+                      res.voto >= 1 ? ' bi bi-star-fill cor-voto' : 'bi bi-star'
+                    }}"
+                  ></i
+                ></a>
+              </li>
+              <li style="padding-top: 7px">
+                <a
+                  type="button"
+                  (click)="votar(2, i)"
+                  [disabled]="res.voto == null"
+                  ><i
+                    class="{{
+                      res.voto >= 2 ? ' bi bi-star-fill cor-voto' : 'bi bi-star'
+                    }}"
+                  ></i
+                ></a>
+              </li>
+              <li style="padding-top: 7px">
+                <a
+                  type="button"
+                  (click)="votar(3, i)"
+                  [disabled]="res.voto == null"
+                  ><i
+                    class="{{
+                      res.voto >= 3 ? ' bi bi-star-fill cor-voto' : 'bi bi-star'
+                    }}"
+                  ></i
+                ></a>
+              </li>
+              <li style="padding-top: 7px">
+                <a
+                  type="button"
+                  (click)="votar(4, i)"
+                  [disabled]="res.voto == null"
+                  ><i
+                    class="{{
+                      res.voto >= 4 ? ' bi bi-star-fill cor-voto' : 'bi bi-star'
+                    }}"
+                  ></i
+                ></a>
+              </li>
+              <li style="padding-top: 7px">
+                <a
+                  type="button"
+                  (click)="votar(5, i)"
+                  [disabled]="res.voto == null"
+                  ><i
+                    class="{{
+                      res.voto >= 5 ? ' bi bi-star-fill cor-voto' : 'bi bi-star'
+                    }}"
+                  ></i
+                ></a>
+              </li>
+            </ul>
+            <div class="read-more"></div>
+            <div class="read-more">
+              <a
+                type="button"
+                target="_blank"
+                href="https://www.google.com.br/maps/place/{{
+                  res.endereco +
+                    ', ' +
+                    res.numero +
+                    ', ' +
+                    res.municipio +
+                    '-' +
+                    res.uf
+                }}"
+                class="btn btn-success btn-sm"
+                style="margin: 5px"
+              >
+                <i class="bi bi-map-fill"></i> Abrir no Maps
+              </a>
+            </div>
+          </div>
+        </article>
+        <!-- End blog entry -->
+        <!-- <div class="blog-pagination">
+          <ul class="justify-content-center">
+            <li
+              *ngFor="let pag of noticiasPaginas; let i = index"
+              class="{{ i == paginaAtual ? 'active' : '' }}"
+            >
+              <a style="cursor: pointer" (click)="paginaAtual = i">{{
+                i + 1
+              }}</a>
+            </li>
+          </ul>
+        </div>
+      </div> -->
+        <!-- End blog entries list -->
+
+        <!-- <form>
+  <agm-map style="height: 300px;" [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapClick)="mapClicked($event)">
+  <agm-marker  [latitude]="lat" [longitude]="lng"></agm-marker>
+        </agm-map>
+</form> -->
+        <!-- Button trigger modal -->
+      </div>
+    </div>
+  </div>
+</section>

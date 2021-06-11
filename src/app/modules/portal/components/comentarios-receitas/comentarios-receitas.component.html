@@ -1,0 +1,70 @@
+<h4 class="comments-count" *ngIf="comentarios.length == 0;else comentariosTemplate">
+  Não há comentários disponíveis
+</h4>
+<div class="blog-comments">
+  <ng-template #comentariosTemplate>
+    <h4 class="comments-count" >
+      {{ comentarios.length }} Comentários
+    </h4>
+    <hr>
+    <div id="comment-1" class="comment" *ngFor="let comentario of comentarios">
+      <div class="d-flex">
+        <div>
+          <h5>@{{ comentario.apelido }}</h5>
+          <time datetime="2020-01-01">{{
+            comentario.dtComentario | date: "dd MMM, yyyy"
+          }}</time>
+          <p>
+            {{ comentario.descricao }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <div class="reply-form">
+    <h4>Deixe um comentário.</h4>
+    <p>Escreva o que você acha sobre o assunto.</p>
+    <form [formGroup]="cadastro" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col form-group">
+          <textarea
+            name="comment"
+            class="form-control {{
+              this.cadastro.controls['descricao'].touched &&
+              this.cadastro.controls['descricao'].value == null
+                ? 'is-invalid'
+                : ''
+            }}"
+            placeholder="Your Comment*"
+            formControlName="descricao"
+          ></textarea>
+          <span class="text-danger" *ngIf="erros != null && erros.descricao">
+            {{ erros.descricao[0] }} <br
+          /></span>
+          <span
+            class="text-danger"
+            *ngIf="
+              this.cadastro.controls['descricao'].touched &&
+              this.cadastro.controls['descricao'].value == null
+            "
+          >
+            É necessário preencher o titulo. <br
+          /></span>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" *ngIf="!aguarda">
+        Comentar
+      </button>
+      <button type="submit" class="btn btn-primary" disabled *ngIf="aguarda">
+        <span
+          class="spinner-border spinner-border-sm"
+          role="status"
+          aria-hidden="true"
+        ></span>
+        Comentando...
+      </button>
+    </form>
+  </div>
+</div>
+<!-- End blog comments -->

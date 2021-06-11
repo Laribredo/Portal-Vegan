@@ -1,0 +1,61 @@
+<!-- ======= Breadcrumbs ======= -->
+<section id="breadcrumbs" class="breadcrumbs">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center">
+      <h2>Ler Noticia</h2>
+    </div>
+  </div>
+</section>
+<!-- End Breadcrumbs -->
+
+<!-- ======= Blog Single Section ======= -->
+<section id="blog" class="blog" *ngIf="noticia != null">
+  <div class="container" data-aos="fade-up">
+    <div class="row">
+      <div class="col-lg-8 entries">
+        <article class="entry entry-single">
+          <div class="entry-img">
+            <img
+              src="{{ repositorio + noticia.imagem }}"
+              alt=""
+              class="img-fluid"
+            />
+          </div>
+
+          <h2 class="entry-title">
+            <a>{{ noticia.titulo }}</a>
+          </h2>
+
+          <div class="entry-meta">
+            <ul>
+              <li class="d-flex align-items-center">
+                <i class="bi bi-person"></i>
+                @{{noticia.apelido}}
+              </li>
+              <li class="d-flex align-items-center">
+                <i class="bi bi-clock"></i>
+                <time datetime="2020-01-01">{{noticia.dtCriacao | date: 'dd MMM, yyyy'}}</time>
+
+              </li>
+              <li class="d-flex align-items-center">
+                <i class="bi bi-chat-dots"></i>
+               {{noticia.qtdComentarios}} Comentários
+              </li>
+            </ul>
+          </div>
+
+          <div class="entry-content" [innerHtml]="noticia.conteudo"></div>
+        </article>
+        <!-- End blog entry -->
+        <app-comentarios-noticia
+          [idPublicacao]="idPubli"
+        ></app-comentarios-noticia>
+      </div>
+      <!-- End blog entries list -->
+      <div class="col-lg-4">
+        <app-recentes [atualiza]="false"></app-recentes>
+      </div>
+      <!-- End blog sidebar -->
+    </div>
+  </div>
+</section>

@@ -1,0 +1,68 @@
+<div class="row">
+  <h2>Cadastre-se</h2>
+  <div class="col-12">
+    <form class="row g-3" action="submit" [formGroup]="cadastro" (ngSubmit)="onSubmit()">
+      <div class="col-12">
+        <label for="inputAddress2" class="form-label">Nome</label>
+        <input type="text" class="form-control" formControlName="nome">
+        <span class="text-danger"
+          *ngIf="this.cadastro.controls['nome'].touched && this.cadastro.controls['nome'].value == null">
+          É necessário preencher o nome</span>
+      </div>
+      <div class="col-md-6">
+        <label for="inputEmail4" class="form-label">Email</label>
+        <input type="email" class="form-control" formControlName="email">
+        <span class="text-danger"
+          *ngIf="this.cadastro.controls['email'].touched && this.cadastro.controls['email'].value == null">
+          É necessário preencher o Email</span>
+      </div>
+      <div class="col-md-6">
+        <label for="inputPassword4" class="form-label">Senha</label>
+        <input type="password" class="form-control" formControlName="senha">
+        <span class="text-danger"
+          *ngIf="this.cadastro.controls['senha'].touched && this.cadastro.controls['senha'].value == null">
+          É necessário definir uma senha</span>
+        <span class="text-danger" *ngIf="this.cadastro.value.senha != null && this.cadastro.value.senha.length < 6">
+          A senha precisa ter no mínimo 6 digitos</span>
+        <!-- <span *ngIf="this.cadastro.controls['email'].touched && this.cadastro.controls['email'].getError()">
+                É necessário preencher o Email</span> -->
+      </div>
+      <div class="col-6">
+        <label for="inputAddress" class="form-label">Data de Nascimento</label>
+        <input type="date" class="form-control" formControlName="dataNascimento">
+        <span class="text-danger"
+          *ngIf="this.cadastro.controls['dataNascimento'].touched && this.cadastro.controls['dataNascimento'].value == null">
+          É necessário preencher a Data de Nascimento</span>
+      </div>
+      <div class="col-6">
+        <label for="inputAddress2" class="form-label">CPF</label>
+        <input type="text" class="form-control" formControlName="cpf">
+        <span class="text-danger"
+          *ngIf="this.cadastro.controls['cpf'].touched && this.cadastro.controls['cpf'].value == null">
+          É necessário preencher o CPF</span>
+      </div>
+      <div class="col-md-12">
+        <label class="visually-hidden" for="autoSizingInputGroup">Apelido</label>
+        <div class="input-group">
+          <div class="input-group-text">@</div>
+          <input type="text" class="form-control" placeholder="Apelido" formControlName="apelido">
+          <br>
+        </div>
+        <span class="text-danger"
+          *ngIf="this.cadastro.controls['apelido'].touched && this.cadastro.controls['apelido'].value == null">
+          É necessário preencher o apelido.</span>
+        <span class="text-danger" *ngIf="this.cadastro.value.apelido != null && this.cadastro.value.apelido.length < 3">
+          O Apelido precisa ter pelo menos 3 dígitos</span>
+      </div>
+      <div class="col-12">
+        <span *ngFor="let e of erros" class="text-danger"> {{e}} <br></span>
+      </div>
+      <div class="col-12">
+        <button type="submit" class="btn btn-success"  *ngIf="!loading" [disabled]="!this.cadastro.valid">Cadastrar-Se</button>
+        <button class="btn btn-success" *ngIf="loading" type="button" disabled>
+          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
